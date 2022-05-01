@@ -10,6 +10,11 @@ const db = mongoose.connection
 db.on('error',(error)=>console.error(error))
 db.once('open',() => console.log('connection to database'))
 
+app.use(express.json())
+
+const subscriberRouter = require('./public/routes/subscribers')
+app.use('/subscribers', subscriberRouter)
+
 app.get('/',(request,response)=>{
     response.type('text/html')
     response.send('<a href="index.html"></a>')
